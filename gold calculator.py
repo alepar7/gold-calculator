@@ -4,9 +4,6 @@ window = Tk()
 window.title('Gold Calculator')
 
 
-# Def:
-# def eny():
-#     Entry().pack()
 
 
 
@@ -60,17 +57,35 @@ lab_par.pack(fill='none',side=LEFT)
 
 
 
-
+# parsian label
 labals = ['Weight:','carat:','Vacume:','Result:']
-
 
 for n , i in enumerate(labals): # Entry name
     Label(lab_parsian, text=i).grid(row=n, column=0)
 
-for n , i in enumerate(labals): # Entry
-    Entry(lab_parsian).grid(row=n, column=1)
+for i in range(3):
+    Entry(lab_parsian).grid(row=i,column=1)
 
 
+# none tax label
+labals_1 = ['Weight:','carat:','Found:','Result:']
+
+for n , i in enumerate(labals_1):
+    Label(lab_notax, text=i).grid(row=n, column=0)
+
+for i in range(3):
+    Entry(lab_notax).grid(row=i,column=1)
+
+
+
+# With tax label
+labals_2 = ['Weight:','carat:','Pay','Tax','Found:','Result:']
+
+for n , i in enumerate(labals_2):
+    Label(lab_tax, text=i).grid(row=n, column=0)
+
+for i in range(5):
+    Entry(lab_tax).grid(row=i,column=1)
 
 
 
