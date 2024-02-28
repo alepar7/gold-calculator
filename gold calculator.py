@@ -88,7 +88,50 @@ for i in range(5):
     Entry(lab_tax).grid(row=i,column=1)
 
 
+# A/B labels
+Label(lab_ac, text='Creditor').grid(row=0, column=0)
+Label(lab_ac, text='Debtor').grid(row=0, column=1)
+
+for i in range(1,20):
+    for j in range(2):
+        Entry(lab_ac).grid(row=i, column=j)
+
+Label(lab_ac, text='result:').grid(row=21, column=0)
 
 
-window.geometry('800x600')
+# Weight sum labels
+for i in range(20):
+    Entry(lab_sum).grid(row=i, column=0)
+
+Label(lab_sum, text='SUM:').grid(row=21, column=0)
+
+
+
+# parsian labels:
+labels_2 = ['Row sum','Weight','Number']
+for i , n in enumerate(labels_2):
+    Label(lab_par, text=n).grid(row=0, column=i)
+
+for i in range(3):
+    for j in range(1,20):
+        Entry(lab_par).grid(row=j, column=i)
+
+Label(lab_par, text='SUM: ').grid(row=21, column=0)
+Label(lab_par, text='SUM: ').grid(row=21, column=2)
+
+
+
+# carat label
+labels_3 = ['Carat','Weight']
+for i,n in enumerate(labels_3):
+    Label(lab_carat, text=n).grid(row=0, column=i+1)
+
+
+Label(lab_carat, text='Weight 750:           ').grid(row=1, column=0)
+Entry(lab_carat).grid(row=1, column=1)
+Entry(lab_carat).grid(row=1, column=2)
+
+
+
+# window.geometry('800x800')
 window.mainloop()
