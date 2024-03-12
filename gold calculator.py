@@ -1,7 +1,38 @@
 from tkinter import *
-
+from decimal import Decimal
 window = Tk()
 window.title('Gold Calculator')
+
+
+def price():
+    p = float(gold_price.get())
+    return p
+
+
+def carat(w,c):
+    a = (w * c) / 750
+    return a
+
+
+def summ():
+    result_1 = []
+    
+    for i in range(3):
+        a = float(e_list[i].get()) if e_list[i].get() else 0
+        result_1.append(a)
+    
+    # Perform calculations here using the retrieved values
+    # For demonstration purposes, let's just display the values entered
+                    # jam = sum(result_1) + price()
+    
+    
+
+
+    w = carat(result_1[0], result_1[1])
+    result_final = int((w * price()) + (result_1[2]))
+    result_final= (f"{result_final:,}")
+    # Display the result
+    Label(lab_parsian, text=result_final).grid(row=3, column=1)
 
 
 
@@ -20,15 +51,8 @@ lab_acount.grid(row=2, column=0)
 lab_carat = LabelFrame(window, text='carat', height=50, width=200)
 lab_carat.grid(row=3, column=0)
 
-
-
-
-
-price_eny = Entry(lab_price)
-price_eny.pack()
-
-
-
+gold_price = Entry(lab_price)
+gold_price.pack()
 
 
 
@@ -42,9 +66,6 @@ lab_notax.pack(fill='none',side=LEFT)
 lab_tax = LabelFrame(lab_cal, text='With Tax', height=50, width=200)
 lab_tax.pack(fill='none',side=LEFT)
 
-
-
-
 lab_ac = LabelFrame(lab_acount, text='A/B', height=50, width=200)
 lab_ac.pack(fill='none',side=LEFT)
 
@@ -57,14 +78,28 @@ lab_par.pack(fill='none',side=LEFT)
 
 
 
-# parsian label
+# main parsian label
 labals = ['Weight:','carat:','Vacume:','Result:']
+e_list = []
 
 for n , i in enumerate(labals): # Entry name
     Label(lab_parsian, text=i).grid(row=n, column=0)
 
-for i in range(3):
-    Entry(lab_parsian).grid(row=i,column=1)
+for i in range(3): 
+    if i == 1:
+        v = StringVar(lab_parsian,value=750) # default value for Entry
+        
+    else:
+        v = StringVar(lab_parsian,value='')
+    e_parsian = Entry(lab_parsian, textvariable=v)
+    e_parsian.grid(row=i,column=1)
+    e_list.append(e_parsian)
+
+# main parsian objects
+main_parsian_btn = Button(lab_parsian,text='OK', command=summ)
+main_parsian_btn.grid(row=4, column=1)
+
+
 
 
 # none tax label
