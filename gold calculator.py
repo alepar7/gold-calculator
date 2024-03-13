@@ -23,7 +23,7 @@ def summ():
     
     # Perform calculations here using the retrieved values
     # For demonstration purposes, let's just display the values entered
-                    # jam = sum(result_1) + price()
+    
     
     
 
@@ -35,6 +35,20 @@ def summ():
     Label(lab_parsian, text=result_final).grid(row=3, column=1)
 
 
+def no_tax_def():
+    result_1 = []
+    for i in range(3):
+        a = float(notax_list[i].get()) if notax_list[i].get() else 0
+        result_1.append(a)
+        
+    w = carat(result_1[0], result_1[1])
+    p = (price() * result_1[2]) / 100
+    result_final = int((price() + p) * w)
+    result_final = (f'{result_final:,}')
+
+
+
+    Label(lab_notax,text=result_final).grid(row=3, column=1)
 
 
 
@@ -95,21 +109,31 @@ for i in range(3):
     e_parsian.grid(row=i,column=1)
     e_list.append(e_parsian)
 
-# main parsian objects
+# Bottons
 main_parsian_btn = Button(lab_parsian,text='OK', command=summ)
 main_parsian_btn.grid(row=4, column=1)
 
+none_tax_btn = Button(lab_notax,text='OK', command=no_tax_def)
+none_tax_btn.grid(row=4, column=1)
 
 
 
 # none tax label
-labals_1 = ['Weight:','carat:','Found:','Result:']
+labals_1 = ['Weight:','carat:','Reward:','Result:']
+notax_list = []
 
 for n , i in enumerate(labals_1):
     Label(lab_notax, text=i).grid(row=n, column=0)
 
-for i in range(3):
-    Entry(lab_notax).grid(row=i,column=1)
+for i in range(3): 
+    if i == 1:
+        v = StringVar(lab_notax,value=750) # default value for Entry
+        
+    else:
+        v = StringVar(lab_notax,value='')
+    notax = Entry(lab_notax, textvariable=v)
+    notax.grid(row=i,column=1)
+    notax_list.append(notax)
 
 
 
