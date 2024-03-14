@@ -25,7 +25,10 @@ def summ():
     # For demonstration purposes, let's just display the values entered
     
     
-    
+def per(x,y):
+    p100 = (x*y) / 100
+    return p100
+  
 
 
     w = carat(result_1[0], result_1[1])
@@ -46,10 +49,20 @@ def no_tax_def():
     result_final = int((price() + p) * w)
     result_final = (f'{result_final:,}')
 
-
-
     Label(lab_notax,text=result_final).grid(row=3, column=1)
 
+
+def tax_def():
+    result_1 = []
+    for i in range(5):
+        a = float(tax_list[i].get()) if tax_list[i].get() else 0
+        result_1.append(a)
+    w = carat(result_1[0], result_1[1])
+    t = price() * (result_1[2] + result_1[4]) * (9 / 100)
+    p = per(result_1[2],price())###########
+    result_final = int((price() * w) + p + t)
+    result_final = (f'{result_final:,}')
+    Label(lab_tax, text=result_final).grid(row=5, column=1)
 
 
 # main frame:
@@ -116,6 +129,8 @@ main_parsian_btn.grid(row=4, column=1)
 none_tax_btn = Button(lab_notax,text='OK', command=no_tax_def)
 none_tax_btn.grid(row=4, column=1)
 
+tax_btn = Button(lab_tax,text='OK', command=tax_def)
+tax_btn.grid(row=6, column=1)
 
 
 # none tax label
@@ -138,13 +153,21 @@ for i in range(3):
 
 
 # With tax label
-labals_2 = ['Weight:','carat:','Pay','Tax','Found:','Result:']
-
+labals_2 = ['Weight:','carat:','Pay','Tax','Reward:','Result:']
+tax_list = []
 for n , i in enumerate(labals_2):
     Label(lab_tax, text=i).grid(row=n, column=0)
 
 for i in range(5):
-    Entry(lab_tax).grid(row=i,column=1)
+    if i == 1:
+        v = IntVar(lab_tax, value=750)
+    elif i == 3:
+        v = IntVar(lab_tax, value=9)
+    else:
+        v = IntVar(lab_tax, value='')
+    with_tax=Entry(lab_tax, textvariable=v)
+    with_tax.grid(row=i, column=1)
+    tax_list.append(with_tax)
 
 
 # A/B labels
