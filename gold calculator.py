@@ -25,17 +25,16 @@ def summ():
     # For demonstration purposes, let's just display the values entered
     
     
-def per(x,y):
-    p100 = (x*y) / 100
-    return p100
-  
-
-
     w = carat(result_1[0], result_1[1])
     result_final = int((w * price()) + (result_1[2]))
     result_final= (f"{result_final:,}")
     # Display the result
     Label(lab_parsian, text=result_final).grid(row=3, column=1)
+
+def per(x,y):
+    p100 = (x*y) / 100
+    return p100
+
 
 
 def no_tax_def():
@@ -52,19 +51,22 @@ def no_tax_def():
     Label(lab_notax,text=result_final).grid(row=3, column=1)
 
 
+
 def tax_def():
     result_1 = []
     for i in range(5):
         a = float(tax_list[i].get()) if tax_list[i].get() else 0
         result_1.append(a)
     w = carat(result_1[0], result_1[1])
-    t = price() * (result_1[2] + result_1[4]) * (9 / 100)
-    p = per(result_1[2],price())###########
-    result_final = int((price() * w) + p + t)
+    tala = price() * w
+    ojrat =(per(tala,result_1[2]))
+    sood = per((tala + ojrat),(result_1[4]))
+    tax = per((sood + ojrat),result_1[3])
+    result_final = int(tala + ojrat + sood + tax)
     result_final = (f'{result_final:,}')
     Label(lab_tax, text=result_final).grid(row=5, column=1)
 
-
+    
 # main frame:
 lab_price = LabelFrame(window, text='Price', height=50, width=200)
 lab_price.grid(row=0, column=0)
