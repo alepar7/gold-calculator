@@ -66,24 +66,34 @@ def tax_def():
     result_final = (f'{result_final:,}')
     Label(lab_tax, text=result_final).grid(row=5, column=1)
 
-def ac_def():    #########
+def ac_def():    
     result_3 = []
-    # for i in range(len(deb_list)):
-    #     a = float(deb_list[i].get()) if deb_list[i].get() else 0
-    #     result_1.append(a)
-    # Label(lab_ac, text=sum(result_1)).grid(row=21, column=1)
+    result_4 = []
     
     for i in range(len(deb_list)):
         a = float(deb_list[i].get()) if deb_list[i].get() else 0
         result_3.append(a)
 
-    # Check if result_1 has any values
-    if result_3:
-        Label(lab_ac, text=sum(result_3)).grid(row=21, column=1)
-    else:
-        # Handle the case where result_1 is empty
-        Label(lab_ac, text="No values to sum").grid(row=21, column=1)
+    for i in range(len(cred_list)):
+        a = float(cred_list[i].get()) if cred_list[i].get() else 0
+        result_4.append(a)
+    
+    result_final = sum(result_3) - sum(result_4)
+    result_final = int(result_final)
 
+    
+    if result_final < 0:
+        result_final = abs(result_final)
+        result_final = (f'{result_final: ,}')
+        result_final = 'Cred %s' % result_final
+    elif result_final == 0:
+        result_final = '0'    
+    else:
+        result_final = (f'{result_final:,}')
+        result_final = 'Deb %s' % result_final
+    
+    Label(lab_ac, text=result_final).grid(row=21, column=1)
+    
 
 # main frame:
 lab_price = LabelFrame(window, text='Price', height=50, width=200)
@@ -203,7 +213,7 @@ for i in range(1,20):
     for j in range(2):
         ac_ent = Entry(lab_ac)
         ac_ent.grid(row=i, column=j)
-        if j == 1:
+        if j == 0:
             cred_list.append(ac_ent)
         else:
             deb_list.append(ac_ent)
